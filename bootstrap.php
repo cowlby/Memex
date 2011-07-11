@@ -13,10 +13,10 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 require_once __DIR__.'/vendor/symfony/src/Symfony/Component/ClassLoader/UniversalClassLoader.php';
 $loader = new UniversalClassLoader();
 $loader->registerNamespaces(array(
-    'Silex'   => __DIR__.'/vendor/silex/src',
-    'Symfony' => __DIR__.'/vendor/symfony/src'
+    'Silex'   => __DIR__.'/vendor/Silex/src',
+    'Symfony' => __DIR__.'/vendor/Symfony/src'
 ));
-$loader->registerPrefixes(array('Pimple' => __DIR__.'/vendor/pimple/lib'));
+$loader->registerPrefixes(array('Pimple' => __DIR__.'/vendor/Pimple/lib'));
 $loader->register();
 
 $app = new Application();
@@ -39,7 +39,7 @@ $app->register(new SessionExtension());
 $app->register(new UrlGeneratorExtension());
 
 $app->register(new SymfonyBridgesExtension(), array(
-    'symfony_bridges.class_path' => $app['vendor.path'].'/symfony/src'
+    'symfony_bridges.class_path' => $app['vendor.path'].'/Symfony/src'
 ));
 
 $app->register(new TwigExtension(), array(
