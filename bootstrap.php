@@ -44,7 +44,7 @@ $app->register(new SymfonyBridgesExtension(), array(
 
 $app->register(new TwigExtension(), array(
     'twig.path' => $app['src.path'].'/views',
-    'twig.options' => array('debug' => true, 'strict_variables' => true),
+    'twig.options' => array('debug' => $app['debug'], 'strict_variables' => true),
 	'twig.class_path' => $app['vendor.path'].'/twig/lib',
     'twig.configure' => $app->protect(function ($twig) use ($app) {
         if (!$app['debug']) {
