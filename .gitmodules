@@ -1,0 +1,9 @@
+[submodule "vendor/Silex"]
+	path = vendor/Silex
+	url = https://github.com/fabpot/Silex.git
+[submodule "vendor/Pimple"]
+	path = vendor/Pimple
+	url = https://github.com/fabpot/Pimple.git
+[submodule "vendor/Symfony"]
+	path = vendor/Symfony
+	url = https://github.com/symfony/symfony.git
