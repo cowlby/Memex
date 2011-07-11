@@ -1,0 +1,7 @@
+<div class="flash" >
+{% for level in ['error', 'warning', 'success', 'info'] %} 
+	{% if app.session.hasFlash(level) %}
+	<p class="{{ level }}">{{ app.session.getFlash(level) }}</p>
+	{% endif %}
+{% endfor %}
+</div>

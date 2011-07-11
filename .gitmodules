@@ -10,3 +10,6 @@
 [submodule "vendor/Twig"]
 	path = vendor/Twig
 	url = https://github.com/fabpot/Twig.git
+[submodule "web/css/blueprint-css"]
+	path = web/css/blueprint-css
+	url = http://github.com/joshuaclayton/blueprint-css.git

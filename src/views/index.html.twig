@@ -1,0 +1,109 @@
+{% extends "layout.html.twig" %}
+
+{% block title 'Home' %}
+
+{% block content %}
+
+<div class="span-12 prepend-6 append-6">
+	<h1>Memcached Stats</h1>
+	{% include('flashes.html.twig') %}
+
+	<div class="span-12 last">
+		<fieldset>
+			<legend>Key Management</legend>
+			<form action="{{ path('key', { 'key': NULL }) }}" id="key_form" method="POST">
+				<input type="hidden" name="_method" value="DELETE" />
+				
+				<label for="key">Key</label>
+				<input type="text" name="key" id="key" value="" />
+				
+				<p>
+					<a href="{{ url('key', { 'key': NULL }) }}" id="show_key" class="button positive">Show</a>
+					<button type="submit" class="negative">Delete</button>
+				</p>
+			</form>
+		</fieldset>
+	</div>
+	
+	<div class="span-12 last">
+		<table cellspacing="0" colborder="0" cellpadding="0">
+			<caption>General Information</caption>
+			<tbody>
+				<tr>
+					<th>Actions</th>
+					<td><a href="{{ url('flush') }}" class="button negative">Flush Server</a></td>
+				</tr>
+				<tr>
+					<th>PHP Version</th>
+					<td>{{ phpversion }}</td>
+				</tr>
+				<tr>
+					<th>Memcached Version</th>
+					<td>{{ stats.version }}</td>
+				</tr>
+				<tr>
+					<th>Memcached Host</th>
+					<td>{{ host }}</td>
+				</tr>
+				<tr>
+					<th>Uptime</th>
+					<td>
+					{%- if stats.uptime < 60 -%}
+						{{ stats.uptime }} Seconds
+					{%- elseif stats.uptime < 60 * 60 -%}
+						{{ stats.uptime / 60 }} Minutes
+					{%- else -%}
+						{{ stats.uptime / 60 / 60 }} Hours
+					{%- endif -%}
+					</td>
+				</tr>
+				<tr>
+					<th>Last Reboot</th>
+					<td>{{ stats.last_reboot|date('r') }}</td>
+				</tr>
+				<tr>
+					<th>Used Cache Size</th>
+					<td>
+					{%- if stats.bytes < 1024 -%}
+						{{ stats.bytes }} Bytes
+					{%- elseif stats.bytes < 1024 * 1024 -%}
+						{{ stats.bytes / 1024 }} KB
+					{%- else -%}
+						{{ stats.bytes / 1024 / 1024 }} MB
+					{%- endif -%}
+					</td>
+				</tr>
+				<tr>
+					<th>Max Cache Size</th>
+					<td>
+					{%- if stats.engine_maxbytes < 1024 -%}
+						{{ stats.engine_maxbytes }} Bytes
+					{%- elseif stats.engine_maxbytes < 1024 * 1024 -%}
+						{{ stats.engine_maxbytes / 1024 }} KB
+					{%- else -%}
+						{{ stats.engine_maxbytes / 1024 / 1024 }} MB
+					{%- endif -%}
+					</td>
+				</tr>
+				<tr>
+					<th>Hits</th>
+					<td>{{ stats.get_hits }}</td>
+				</tr>
+				<tr>
+					<th>Misses</th>
+					<td>{{ stats.get_misses }}</td>
+				</tr>
+				<tr>
+					<th>Evictions</th>
+					<td>{{ stats.evictions }}</td>
+				</tr>
+				<tr>
+					<th>Flushes</th>
+					<td>{{ stats.cmd_flush }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+
+{% endblock %}

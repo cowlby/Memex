@@ -1,0 +1,32 @@
+{% extends "layout.html.twig" %}
+
+{% block title key %}
+
+{% block content %}
+<div class="span-12 prepend-6 append-6">
+	<h1>Key {{ key }}</h1>
+	{% include('flashes.html.twig') %}
+
+	<div class="span-12 last">
+		<fieldset>
+			<legend>Key Management</legend>
+			<form action="{{ path('key', { 'key': NULL }) }}" id="key_form" method="POST">
+				<input type="hidden" name="_method" value="DELETE" />
+				
+				<label for="key">Key</label>
+				<input type="text" name="key" id="key" value="" />
+				
+				<p>
+					<a href="{{ url('key', { 'key': NULL }) }}" id="show_key" class="button positive">Show</a>
+					<button type="submit" class="negative">Delete</button>
+				</p>
+			</form>
+		</fieldset>
+	</div>
+	
+	<fieldset>
+		<legend>Data</legend>
+		<pre class="clear">{{ data }}</pre>
+	</fieldset>
+</div>
+{% endblock %}
